@@ -8,6 +8,7 @@ import { TbPencilPlus } from "react-icons/tb"
 
 
 function App() {
+  const [toDoList, setToDoList] = useState([]);
 
   return (
     <>
@@ -21,6 +22,17 @@ function App() {
               <TbPencilPlus/>
             </p>
           </div>
+        </div>
+      </div>
+      <div className='ti-do-list'>
+        <div className='to-do-container'>
+          <p className='to-do-checkbox'>
+            <RiCheckboxBlankFill/>
+          </p>
+          <p className='to-do-text'>Walk the dog</p>
+          <p className='to-do-delete'>
+            <RiDeleteBin6Fill/>
+          </p>
         </div>
       </div>
     </>
