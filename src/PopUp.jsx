@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 function PopUp({ popUp, handlePopUp, addTask, newTaskText, setNewTaskText }){
+    const inputRef = useRef(null);
+
+    useEffect(() =>{
+        const handleKeyDown = (e) => {
+            if(e.key === "Escape"){
+                handlePopUp("close");
+            }
+            else if(e.key === "Enter"){
+                addTask();
+            }
+        };
+        if(popUp){
+            window.addEventListener("keydown", handleKeyDown);
+            if(inputRef.current){
+                inputRef.current.focus();
+            }
+        }
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [popUp, addTask, handlePopUp]);
+
     return(
         popUp &&
         <div className='pop-up-container'>
@@ -9,6 +32,7 @@ function PopUp({ popUp, handlePopUp, addTask, newTaskText, setNewTaskText }){
                 Let's add a new task
             </p>
             <input
+                ref={inputRef}
                 className='pop-up-input'
                 type='text'
                 value={newTaskText}
